@@ -117,14 +117,14 @@ export default function Portfolio() {
         {/* Side Drawer for Mobile */}
         <motion.div
           className={cn(
-            "fixed top-0 left-0 bottom-0 bg-background/95 backdrop-blur-lg z-50 w-[70%] overflow-y-auto transform transition-transform duration-300 ease-in-out",
+            "fixed top-0 left-0 bottom-0 bg-background backdrop-blur-lg z-50 w-[70%] overflow-y-auto transform transition-transform duration-300 ease-in-out",
             isMenuOpen ? "translate-x-0" : "-translate-x-full"
           )}
           initial={{ opacity: 0 }}
           animate={{ opacity: isMenuOpen ? 1 : 0 }}
           exit={{ opacity: 0 }}
         >
-          <nav className="flex flex-col px-4 py-4 mt-10 space-y-4">
+          <nav className="flex flex-col py-4 mt-10 space-y-4">
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
