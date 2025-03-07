@@ -62,6 +62,18 @@ export default function Portfolio() {
     { name: "Contact", ref: contactRef },
   ];
 
+  // Disable scrolling on the body when the menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
+
   return (
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
       <div className="min-h-screen bg-background flex flex-col text-foreground theme-transition relative overflow-x-hidden overflow-y-hidden">
@@ -117,7 +129,7 @@ export default function Portfolio() {
         {/* Side Drawer for Mobile */}
         <motion.div
           className={cn(
-            "fixed top-0 left-0 bottom-0 bg-background backdrop-blur-lg z-50 w-[70%] overflow-y-auto transform transition-transform duration-300 ease-in-out",
+            "fixed top-0 left-0 bottom-0 bg-background backdrop-blur-lg z-50 w-[70%] overflow-y-auto transform transition-transform duration-300 ease-in-out rounded-r-lg shadow-lg",
             isMenuOpen ? "translate-x-0" : "-translate-x-full"
           )}
           initial={{ opacity: 0 }}
