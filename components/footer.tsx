@@ -21,7 +21,7 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <p className="text-muted-foreground text-sm">
-              © {currentYear} Your Name. All rights reserved.
+              © {currentYear} Asheri Musa. All rights reserved.
             </p>
           </motion.div>
           <motion.div
