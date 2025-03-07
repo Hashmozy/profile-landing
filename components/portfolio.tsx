@@ -71,7 +71,7 @@ export default function Portfolio() {
         />
         <header
           className={cn(
-            "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+            "fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
             isScrolled ? "backdrop-blur-md shadow-sm" : "bg-transparent"
           )}
         >
@@ -112,29 +112,33 @@ export default function Portfolio() {
               </Button>
             </div>
           </motion.div>
-          {isMenuOpen && (
-            <motion.div
-              className="md:hidden bg-background/95 backdrop-blur-lg"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.ref)}
-                    className="text-foreground/80 hover:text-foreground transition-colors py-2 border-b border-border/50"
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.name}
-                  </motion.button>
-                ))}
-              </nav>
-            </motion.div>
-          )}
         </header>
+
+        {/* Side Drawer for Mobile */}
+        <motion.div
+          className={cn(
+            "fixed top-0 left-0 bottom-0 bg-background/95 backdrop-blur-lg z-50 w-[70%] overflow-y-auto transform transition-transform duration-300 ease-in-out",
+            isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          )}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isMenuOpen ? 1 : 0 }}
+          exit={{ opacity: 0 }}
+        >
+          <nav className="flex flex-col px-4 py-4 mt-10 space-y-4">
+            {navItems.map((item) => (
+              <motion.button
+                key={item.name}
+                onClick={() => scrollToSection(item.ref)}
+                className="text-foreground/80 hover:text-foreground transition-colors py-2 border-b border-border/50"
+                whileTap={{ scale: 0.95 }}
+              >
+                {item.name}
+              </motion.button>
+            ))}
+          </nav>
+        </motion.div>
+
+        {/* Main Content */}
         <main>
           <motion.div
             ref={homeRef}
