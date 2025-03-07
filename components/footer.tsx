@@ -1,28 +1,34 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import { SiLinkedin, SiGithub } from "react-icons/si";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-  ]
-
+    { icon: SiGithub, href: "#", label: "GitHub" },
+    { icon: SiLinkedin, href: "#", label: "LinkedIn" },
+    { icon: X, href: "#", label: "X (formerly Twitter)" },
+  ];
   return (
     <footer className="bg-muted py-8">
-      <div className="container px-4">
+      <div className="container px-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="text-muted-foreground text-sm">© {currentYear} Your Name. All rights reserved.</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-muted-foreground text-sm">
+              © {currentYear} Your Name. All rights reserved.
+            </p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex space-x-4 mt-4 md:mt-0"
+            className="flex space-x-6 mt-4 md:mt-0 mr-10"
           >
             {socialLinks.map((link, index) => (
               <motion.a
@@ -44,8 +50,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
-
+export default Footer;

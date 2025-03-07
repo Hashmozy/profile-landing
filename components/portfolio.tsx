@@ -1,57 +1,58 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState, useRef } from "react"
-import { Menu, X, ArrowUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import Hero from "@/components/sections/hero"
-import About from "@/components/sections/about"
-import Projects from "@/components/sections/projects"
-import Contact from "@/components/sections/contact"
-import MobileShowcase from "@/components/sections/mobile-showcase"
-import Footer from "@/components/footer"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { motion, useScroll, useSpring } from "framer-motion"
+import { useEffect, useState, useRef } from "react";
+import { Menu, X, ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Hero from "@/components/sections/hero";
+import About from "@/components/sections/about";
+import Projects from "@/components/sections/projects";
+import Contact from "@/components/sections/contact";
+import MobileShowcase from "@/components/sections/mobile-showcase";
+import Footer from "@/components/footer";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { BackgroundShapes } from "./background-shapes";
 
 export default function Portfolio() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const homeRef = useRef<HTMLDivElement>(null)
-  const aboutRef = useRef<HTMLDivElement>(null)
-  const projectsRef = useRef<HTMLDivElement>(null)
-  const mobileRef = useRef<HTMLDivElement>(null)
-  const contactRef = useRef<HTMLDivElement>(null)
+  const homeRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll()
+  const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
-  })
+  });
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      setShowScrollTop(window.scrollY > 300)
-    }
+      setIsScrolled(window.scrollY > 50);
+      setShowScrollTop(window.scrollY > 300);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
-    setIsMenuOpen(false)
-    ref.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    setIsMenuOpen(false);
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const navItems = [
     { name: "Home", ref: homeRef },
@@ -59,16 +60,19 @@ export default function Portfolio() {
     { name: "Projects", ref: projectsRef },
     { name: "Mobile", ref: mobileRef },
     { name: "Contact", ref: contactRef },
-  ]
+  ];
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-      <div className="min-h-screen bg-background text-foreground theme-transition">
-        <motion.div className="fixed top-0 left-0 right-0 h-1 bg-primary z-50" style={{ scaleX }} />
+      <div className="min-h-screen bg-background text-foreground theme-transition relative">
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-primary z-50"
+          style={{ scaleX }}
+        />
         <header
           className={cn(
             "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-            isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent",
+            isScrolled ? "backdrop-blur-md shadow-sm" : "bg-transparent"
           )}
         >
           <motion.div
@@ -77,7 +81,7 @@ export default function Portfolio() {
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
-            <div className="font-bold text-xl">Portfolio</div>
+            <div className="font-bold text-xl">ash.dev</div>
             <nav className="hidden md:flex items-center space-x-6">
               {navItems.map((item) => (
                 <motion.button
@@ -100,7 +104,11 @@ export default function Portfolio() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </Button>
             </div>
           </motion.div>
@@ -169,16 +177,25 @@ export default function Portfolio() {
             <Contact />
           </motion.div>
         </main>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <Footer />
         </motion.div>
         <motion.div
           className={cn(
             "fixed bottom-6 right-6 z-40",
-            showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none",
+            showScrollTop
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10 pointer-events-none"
           )}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showScrollTop ? 1 : 0, y: showScrollTop ? 0 : 20 }}
+          animate={{
+            opacity: showScrollTop ? 1 : 0,
+            y: showScrollTop ? 0 : 20,
+          }}
           transition={{ duration: 0.3 }}
         >
           <Button
@@ -193,6 +210,5 @@ export default function Portfolio() {
         </motion.div>
       </div>
     </ThemeProvider>
-  )
+  );
 }
-
