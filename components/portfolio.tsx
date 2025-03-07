@@ -64,14 +64,14 @@ export default function Portfolio() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-      <div className="min-h-screen bg-background text-foreground theme-transition relative">
+      <div className="min-h-screen bg-background flex flex-col text-foreground theme-transition relative overflow-x-hidden overflow-y-hidden">
         <motion.div
           className="fixed top-0 left-0 right-0 h-1 bg-primary z-50"
           style={{ scaleX }}
         />
         <header
           className={cn(
-            "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+            "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
             isScrolled ? "backdrop-blur-md shadow-sm" : "bg-transparent"
           )}
         >
@@ -82,7 +82,7 @@ export default function Portfolio() {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <div className="font-bold text-xl">ash.dev</div>
-            <nav className="hidden md:flex items-center space-x-6">
+            <nav className="hidden lg:flex items-center space-x-6">
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}
@@ -114,7 +114,7 @@ export default function Portfolio() {
           </motion.div>
           {isMenuOpen && (
             <motion.div
-              className="md:hidden bg-background/95 backdrop-blur-sm"
+              className="md:hidden bg-background/95 backdrop-blur-lg"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -186,7 +186,7 @@ export default function Portfolio() {
         </motion.div>
         <motion.div
           className={cn(
-            "fixed bottom-6 right-6 z-40",
+            "fixed bottom-10 right-6 -translate-x-1/2 z-40",
             showScrollTop
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10 pointer-events-none"
